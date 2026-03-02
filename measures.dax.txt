@@ -1,0 +1,19 @@
+-- Core KPIs
+
+Total Revenue =
+SUM(fact_properties[price_inr])
+
+Total Bookings =
+SUM(fact_properties[booking_flag])
+
+Booking Conversion Rate =
+DIVIDE([Total Bookings], COUNT(fact_properties[property_id]))
+
+-- Time Intelligence
+
+Revenue QoQ % =
+DIVIDE(
+    [Total Revenue] -
+    CALCULATE([Total Revenue], PREVIOUSQUARTER(Dim_Date[Date])),
+    CALCULATE([Total Revenue], PREVIOUSQUARTER(Dim_Date[Date]))
+)
